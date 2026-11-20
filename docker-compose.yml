@@ -13,10 +13,10 @@ services:
       db:
         condition: service_healthy
     healthcheck:
-      test: ["CMD-SHELL", "wget -q --spider http://127.0.0.1:3000 || exit 1"]
+      test: ["CMD", "wget -q --spider http://127.0.0.1:3000 || exit 1"]
       interval: 10s
       timeout: 5s
-      retries: 3
+      retries: 2
       start_period: 10s
   db:
     image: mariadb:11.4
@@ -32,7 +32,7 @@ services:
      test: ["CMD","healthcheck.sh","--connect","--innodb_initialized"]
      interval: 5s
      timeout: 3s
-     retries: 10
+     retries: 2
      start_period: 5s
 
 volumes:
